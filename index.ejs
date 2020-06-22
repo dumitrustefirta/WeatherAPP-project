@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WeatherAPP</title>
+</head>
+
+<body>
+    <%- include header-%>
+
+    <main class="main">
+        <img id="image-placeholder"
+            src="https://images.unsplash.com/photo-1546614409-810f10108b74?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1791&q=80"
+            alt="Crispy City">
+        <section id="select_city">
+            <h2>Weather forecast finder</h2>
+        </section>
+        <div class="container">
+            <div class="app-title">
+                <p>Weather</p>
+            </div>
+            <div class="notification"> </div>
+            <div class="weather-container">
+                <div class="weather-icon">
+                    <img src="./src/images/icons/unknown.png" alt="icon">
+                </div>
+                <div class="temperature-value">
+                    <p>- °<span>C</span></p>
+                </div>
+                <div class="temperature-description">
+                    <p> - </p>
+                </div>
+                <div class="location">
+                    <p>-</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+</body>
+
+</html>
