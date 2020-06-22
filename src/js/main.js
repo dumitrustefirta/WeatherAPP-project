@@ -98,7 +98,7 @@ function selectCity(cities) {
 function renderWeather(data) {
     weather.temperature.value = Math.floor(data.main.temp - KELVIN);
     weather.description = data.weather[0].description;
-    weather.iconId = data.weather[0].icon;
+    //weather.iconId = data.weather[0].icon;
     weather.city = data.name;
     weather.country = data.sys.country;
 }
@@ -106,7 +106,7 @@ function renderWeather(data) {
 ////******* displaying data weather *********///////
 
 function displayWeather(){
-    iconElement.innerHTML = `<img src="icons/${weather.iconId}.png" alt="icon"/>`;
+    // iconElement.innerHTML = `<img src="icons/${weather.iconId}.png" alt="icon"/>`;
     tempElement.innerHTML = `${weather.temperature.value}°<span>C</span>`;
     descElement.innerHTML = weather.description;
     locationElement.innerHTML = `${weather.city}, ${weather.country}`;
