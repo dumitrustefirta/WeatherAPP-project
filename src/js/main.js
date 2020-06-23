@@ -1,4 +1,5 @@
 import '../styles/styles.scss';
+import './burger.js';
 import {cities} from './cityData.js';
 import { getByCity } from './api.js';
 
@@ -25,17 +26,17 @@ dateElement.innerHTML = today.toLocaleDateString("en-US", optionsDate);
 
 /////********* localStorage ******////////
 
-let myStorage = getCityFromLocalStorage();
-myStorage === null ? myStorage = [] : myStorage;
+let newLocalStorage = getLocalStorage();
+//newLocalStorage === null ? newLocalStorage = [] : newLocalStorage;
 
-function getCityFromLocalStorage() {
+function getLocalStorage() {
     return JSON.parse(localStorage.getItem('city'));
 }
 
-function setLocalStorCity(city) {
+function setLocalStorage(city) {
     localStorage.setItem('city', JSON.stringify(city))
 }
-
+weatherContainer.style.display = 'none';
 /////////******* selecting city and fetch data weather ****/////
 
 function selectCity(cities) {
@@ -60,27 +61,17 @@ function selectCity(cities) {
        
     selectBox.addEventListener('change', (event) => {
         let citiesKeys = event.target.value;
-        console.log(citiesKeys);
-
-    /*   How to set display none for weather container when is...?????? 
-
-        if (citiesKeys) {
-            weatherContainer.style.display = 'block';
-        } else {
-            weatherContainer.style.display = 'none';
-        } */
-
-
         let cityImage = cities[citiesKeys].url;
         let image = document.getElementById('image-placeholder');
+        let newLocalStorage = [];
         image.setAttribute('src', cityImage);
 
-        myStorage.push({
-            id: cities[citiesKeys].name,
+        newLocalStorage.push({
+            url: cities[citiesKeys].url,
             text: cities[citiesKeys].name,
         });
 
-        setLocalStorCity(myStorage);
+        setLocalStorage(newLocalStorage);
 
         // CALL API FOR CITY DATA
 
@@ -98,7 +89,7 @@ function selectCity(cities) {
 function renderWeather(data) {
     weather.temperature.value = Math.floor(data.main.temp - KELVIN);
     weather.description = data.weather[0].description;
-    //weather.iconId = data.weather[0].icon;
+    weather.iconId = data.weather[0].icon;
     weather.city = data.name;
     weather.country = data.sys.country;
 }
@@ -106,7 +97,8 @@ function renderWeather(data) {
 ////******* displaying data weather *********///////
 
 function displayWeather(){
-    // iconElement.innerHTML = `<img src="icons/${weather.iconId}.png" alt="icon"/>`;
+    weatherContainer.style.display = 'block';
+    iconElement.innerHTML = `<img src="icons/${weather.iconId}.png" alt="icon"/>`;
     tempElement.innerHTML = `${weather.temperature.value}°<span>C</span>`;
     descElement.innerHTML = weather.description;
     locationElement.innerHTML = `${weather.city}, ${weather.country}`;
