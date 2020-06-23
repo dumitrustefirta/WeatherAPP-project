@@ -14,6 +14,7 @@
     display: flex;
     align-items: center;
     position: relative;
+    z-index: 2;
 
     p {
         color: #ffffff;
@@ -87,6 +88,7 @@
 }
 
 ///*** Weather data container ***///
+
 .container {
   width: 300px;    
   margin-top: 40px;
@@ -100,36 +102,42 @@
   font-size: 25px;
 }
 
-.nav {
-  position: absolute;
-  right: 0px;
+///******  menu nav &&& btn burger  *****/////
 
-  @media (max-width: 1024px) {
-    display: none;
+
+@media (min-width: 1024px) {
+  .nav {
+    position: absolute;
+    right: 0px;
   }
-}
+  .menu-nav {
+    list-style-type: none;
+    overflow: hidden;
+    float: right; 
+      
+    &__item {
+      float: left; 
+    }
+  
+    &__link {
+      padding:0 45px;
+      color: #ffffff;
+      text-decoration: none;
+      opacity: 0.7; 
+      cursor: pointer;
 
-.menu-nav {
-  list-style-type: none;
-  overflow: hidden;
-  float: right; 
-    
-  &__item {
-    float: left; 
-  }
-
-  &__link {
-    padding:0 45px;
-    color: #ffffff;
-    text-decoration: none;
-    opacity: 0.7; 
-    cursor: pointer;
+      &:hover {
+        color:orange;
+      }
+    }
   }
 }
 
 @media (max-width: 1024px) {
+
   .menu-btn {
     position: absolute;
+    z-index: 1;
     right: 30px;
     display: flex;
     justify-content: center;
@@ -163,7 +171,53 @@
     &__burger::after {
         transform: translateY(8px);
     }
+  } 
+
+  .nav {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 100vw;
+    visibility: hidden;
   
-  }  
- 
-}
+    &.open {
+      visibility: visible;
+    }
+
+    .menu-nav {
+      display: flex;
+      flex-flow: column wrap;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      overflow: hidden;
+      background-color: black;
+      opacity: 0.9;
+      list-style-type: none;
+      padding-right: 1rem;
+      transform: translateY(-100%);
+      
+      &.open {
+        transform: translateY(0);
+      }
+
+      &__item {
+        color: #fff;
+      }  
+      
+      &__link {
+        display: inline-block;
+        color: #fff;
+        text-transform: uppercase;
+        text-decoration: none;
+        padding: 2rem 0;
+        font-size: 2rem;
+        font-weight: 300;
+
+        &:hover {
+          color: orange;
+        }
+      }
+    }
+  }
+}    
