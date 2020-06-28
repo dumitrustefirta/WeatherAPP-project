@@ -1,14 +1,20 @@
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const {CleanWebpackPlugin} = require('clean-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 
 module.exports = {
-    entry: './src/js/main.js',
+    entry: {
+        main: './src/js/main.js',
+        shared: './src/js/shared.js',
+        list: './src/js/list.js',
+        about: './src/js/about.js'
+    },
+
     output: {
         path: path.resolve(__dirname, 'build'),
-        filename: 'bundle.js'
+        filename: '[name].js'
     },
     module: {
         rules: [
@@ -34,26 +40,29 @@ module.exports = {
         ]
     },
     plugins: [
-        new CleanWebpackPlugin(),
+        //new CleanWebpackPlugin(),
+        new CopyPlugin({
+            patterns: [
+                {from: 'src/images/icons', to: 'images'}
+            ]
+        }),
         new MiniCssExtractPlugin({
             filename: 'style.css'
         }), 
-        // new CopyWebpackPlugin({
-        //     patterns: [
-        //         {from: './src/images/icons', to: 'icons'}
-        //     ]
-        // }),
         new HtmlWebpackPlugin({
             filename: 'index.html',
-            template: '!!ejs-webpack-loader!./index.ejs'
+            template: '!!ejs-webpack-loader!./index.ejs',
+            chunks: ['shared','main']
         }),
         new HtmlWebpackPlugin({
             filename: 'list.html',
-            template: '!!ejs-webpack-loader!./list.ejs'
+            template: '!!ejs-webpack-loader!./list.ejs',
+            chunks: ['shared','list']
         }),
         new HtmlWebpackPlugin({
             filename: 'about.html',
-            template: '!!ejs-webpack-loader!./about.ejs'
+            template: '!!ejs-webpack-loader!./about.ejs',
+            chunks: ['shared','about']
         })
     ],
     devServer: {

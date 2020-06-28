@@ -38,5 +38,9 @@ export const cities =  {
     sydney: {
       url: "https://images.unsplash.com/photo-1506374322094-6021fc3926f1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1106&q=80",
       name: "Sydney"
+    },
+    anchorage: {
+      url: "https://images.unsplash.com/photo-1516750930166-ed88ab1adb61?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1049&q=80",
+      name: "Anchorage"
     }
   }

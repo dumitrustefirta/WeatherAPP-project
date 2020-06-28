@@ -1,0 +1,31 @@
+.header {
+    position: fixed;;
+}
+
+.main__list {
+    background-color: #ACBBBE;
+    height: 100vh;
+    width: 100%; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    .cities-list {
+        min-width: 250px;
+        height: auto;
+        font-size: 22px;
+
+        &__info {
+            width: 100%;
+            padding: 0 1em;
+            margin: 1em 0;
+            border: 1px solid #36464C;
+
+            &:hover {
+                background-color: #ED7E5F;
+            }
+        }
+    }
+
+  }
+  

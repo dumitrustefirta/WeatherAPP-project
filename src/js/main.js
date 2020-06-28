@@ -1,5 +1,4 @@
 import '../styles/styles.scss';
-import './burger.js';
 import {cities} from './cityData.js';
 import { getByCity } from './api.js';
 
@@ -10,7 +9,6 @@ const descElement = document.querySelector(".temperature-description p");
 const locationElement = document.querySelector(".location p");
 
 const weather = {};
-const KELVIN = 273;
 
 weather.temperature = {
     unit : "celsius"
@@ -19,24 +17,28 @@ weather.temperature = {
 /////********* Show todays date *****/////////
 
 const dateElement = document.getElementById('date');
-const optionsDate = {weekday : "long", month:"short", day:"numeric"};
+const optionsDate = {weekday : "short", month:"short", day:"numeric"};
 const today = new Date();
 
 dateElement.innerHTML = today.toLocaleDateString("en-US", optionsDate);
 
 /////********* localStorage ******////////
 
-let newLocalStorage = getLocalStorage();
-//newLocalStorage === null ? newLocalStorage = [] : newLocalStorage;
+function renderSelectedCity(citiesKeys) {
+    let cityImage = cities[citiesKeys].url;
+    let image = document.getElementById('image-placeholder');
+    image.setAttribute('src', cityImage);
 
-function getLocalStorage() {
-    return JSON.parse(localStorage.getItem('city'));
+    getByCity(cities[citiesKeys].name)
+        .then(data => renderWeather(data))
+        .then(function(){
+            displayWeather()
+        })
+        .catch(error => console.log(error));
 }
 
-function setLocalStorage(city) {
-    localStorage.setItem('city', JSON.stringify(city))
-}
 weatherContainer.style.display = 'none';
+
 /////////******* selecting city and fetch data weather ****/////
 
 function selectCity(cities) {
@@ -54,6 +56,7 @@ function selectCity(cities) {
     for (const city in cities) {
         let option = document.createElement('option');
         option.setAttribute('value', city)
+        option.setAttribute('id', city)
         option.innerText = cities[city].name;
         
         selectBox.append(option);
@@ -61,33 +64,20 @@ function selectCity(cities) {
        
     selectBox.addEventListener('change', (event) => {
         let citiesKeys = event.target.value;
-        let cityImage = cities[citiesKeys].url;
-        let image = document.getElementById('image-placeholder');
-        let newLocalStorage = [];
-        image.setAttribute('src', cityImage);
-
-        newLocalStorage.push({
-            url: cities[citiesKeys].url,
-            text: cities[citiesKeys].name,
-        });
-
-        setLocalStorage(newLocalStorage);
-
+        if(citiesKeys === undefined) {
+            console.log('fuck');
+        }
+        renderSelectedCity(citiesKeys);
+        localStorage.setItem('selectedCity', citiesKeys);
         // CALL API FOR CITY DATA
 
-        getByCity(cities[citiesKeys].name)
-            .then(response => response.json())
-            .then(data => renderWeather(data))
-            .then(function(){
-                displayWeather()
-            })
-            .catch(error => console.log(error));
+        
     })
     select.append(selectBox);
 }
 
 function renderWeather(data) {
-    weather.temperature.value = Math.floor(data.main.temp - KELVIN);
+    weather.temperature.value = Math.floor(data.main.temp);
     weather.description = data.weather[0].description;
     weather.iconId = data.weather[0].icon;
     weather.city = data.name;
@@ -98,18 +88,24 @@ function renderWeather(data) {
 
 function displayWeather(){
     weatherContainer.style.display = 'block';
-    iconElement.innerHTML = `<img src="icons/${weather.iconId}.png" alt="icon"/>`;
-    tempElement.innerHTML = `${weather.temperature.value}°<span>C</span>`;
+    iconElement.innerHTML = `<img src="images/${weather.iconId}.png" alt="icon"/>`;
+    tempElement.innerHTML = `${weather.temperature.value}°C`;
     descElement.innerHTML = weather.description;
     locationElement.innerHTML = `${weather.city}, ${weather.country}`;
 }
-
-// C to F conversion
-
-function celsiusToFahrenheit(temperature){
-    return (temperature * 9/5) + 32;
-}
-
-// to addEventListener on temp to convert it in fahrenheit///////
     
 selectCity(cities);
+
+/////********* localStorage ******////////
+
+const selectedCity = localStorage.getItem('selectedCity');
+
+if(selectedCity) {
+    let selectedCityElement = document.getElementById(selectedCity)
+    if(selectedCityElement){
+        selectedCityElement.selected = true
+        renderSelectedCity(selectedCity);
+    } 
+} else {
+    console.log('...simple flow');
+}
