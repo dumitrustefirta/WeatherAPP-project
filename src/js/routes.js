@@ -1,5 +1,6 @@
 export const routes = {
-    main: 'main',
+    index: 'index',
     list: 'list',
+    forecast: 'forecast',
     about: 'about'
 }

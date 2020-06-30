@@ -37,7 +37,7 @@ function renderSelectedCity(citiesKeys) {
         .catch(error => console.log(error));
 }
 
-weatherContainer.style.display = 'none';
+//weatherContainer.style.display = 'none';
 
 /////////******* selecting city and fetch data weather ****/////
 
@@ -65,16 +65,15 @@ function selectCity(cities) {
     selectBox.addEventListener('change', (event) => {
         let citiesKeys = event.target.value;
         if(citiesKeys === undefined) {
-            console.log('fuck');
+            console.log('dream work');
         }
         renderSelectedCity(citiesKeys);
-        localStorage.setItem('selectedCity', citiesKeys);
-        // CALL API FOR CITY DATA
-
-        
+        localStorage.setItem('selectedCity', citiesKeys);       
     })
     select.append(selectBox);
 }
+
+selectCity(cities);
 
 function renderWeather(data) {
     weather.temperature.value = Math.floor(data.main.temp);
@@ -94,11 +93,9 @@ function displayWeather(){
     locationElement.innerHTML = `${weather.city}, ${weather.country}`;
 }
     
-selectCity(cities);
-
 /////********* localStorage ******////////
 
-const selectedCity = localStorage.getItem('selectedCity');
+export const selectedCity = localStorage.getItem('selectedCity');
 
 if(selectedCity) {
     let selectedCityElement = document.getElementById(selectedCity)

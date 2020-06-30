@@ -1,31 +1,45 @@
-.header {
-    position: fixed;;
-}
-
 .main__list {
     background-color: #ACBBBE;
-    height: 100vh;
+    height: auto;
     width: 100%; 
     display: flex;
     justify-content: center;
     align-items: center;
     
     .cities-list {
-        min-width: 250px;
+        width: 85%;
         height: auto;
         font-size: 22px;
+        font-weight: bold;
 
         &__info {
             width: 100%;
-            padding: 0 1em;
+            height: auto;
+            padding: 0 0.5em;
             margin: 1em 0;
             border: 1px solid #36464C;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            img {
+                width: 40px;
+            }
+
+            span.temp {
+                display: flex;
+                align-items: center;
+            }
+
+            span.second-info {
+                font-size: .7em;
+                font-weight: normal;
+            }
 
             &:hover {
                 background-color: #ED7E5F;
             }
         }
     }
-
-  }
+}
   

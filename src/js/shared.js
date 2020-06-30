@@ -34,7 +34,6 @@ function initNavigation() {
     let route = null;
     for (let item in routes) {
         if(location.pathname.includes(item)) {
-            console.log(item);
             route = item;
         }
     }

@@ -1,11 +1,11 @@
 export const cities =  {
+    chisinau: {
+    url: "https://sx-content-labs.sixt.io/chisinau-city-header.jpg",
+    name: "Chisinau"
+    },
     london: {
       name: "London",
       url:"https://images.unsplash.com/photo-1505761671935-60b3a7427bad?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80"
-    },
-    chisinau: {
-      url: "https://sx-content-labs.sixt.io/chisinau-city-header.jpg",
-      name: "Chisinau"
     },
     moscow: {
       url: "https://cdn.getyourguide.com/img/tour_img-1233054-98.jpg",

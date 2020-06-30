@@ -6,9 +6,10 @@ const CopyPlugin = require('copy-webpack-plugin');
 
 module.exports = {
     entry: {
-        main: './src/js/main.js',
+        index: './src/js/index.js',
         shared: './src/js/shared.js',
         list: './src/js/list.js',
+        forecast: './src/js/forecast.js',
         about: './src/js/about.js'
     },
 
@@ -52,12 +53,17 @@ module.exports = {
         new HtmlWebpackPlugin({
             filename: 'index.html',
             template: '!!ejs-webpack-loader!./index.ejs',
-            chunks: ['shared','main']
+            chunks: ['shared','index']
         }),
         new HtmlWebpackPlugin({
             filename: 'list.html',
             template: '!!ejs-webpack-loader!./list.ejs',
             chunks: ['shared','list']
+        }),
+        new HtmlWebpackPlugin({
+            filename: 'forecast.html',
+            template: '!!ejs-webpack-loader!./forecast.ejs',
+            chunks: ['shared','forecast']
         }),
         new HtmlWebpackPlugin({
             filename: 'about.html',

@@ -7,13 +7,12 @@
       list-style-type: none;
       overflow: hidden;
       float: right; 
-        
+
       &__item {
-        float: left; 
+        float: left;
         
         &.active {
-          background-color: #ED7E5F;
-          border-radius: 3px;
+          border-bottom: 2px solid #ED7E5F;
         }
       }
     
