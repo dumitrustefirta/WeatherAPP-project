@@ -8,7 +8,7 @@
 </head>
 
 <body>
-    
+
     <%- include header-%>
 
     <main class="main">
@@ -16,13 +16,13 @@
             src="https://images.unsplash.com/photo-1546614409-810f10108b74?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1791&q=80"
             alt="Crispy City">
         <section id="select_city">
-            <h2>Weather forecast finder</h2>
+            <h2>Select your city</h2>
         </section>
         <div class="container">
-            <div class="app-title">
-                <p>Weather</p>
+            <div class="location">
+                <p>-</p>
+                <hr>
             </div>
-            <div class="notification"> </div>
             <div class="weather-container">
                 <div class="weather-icon">
                     <img src="images/unknown.png" alt="icon">
@@ -33,12 +33,15 @@
                 <div class="temperature-description">
                     <p> - </p>
                 </div>
-                <div class="location">
-                    <p>-</p>
-                </div>
+                <div class="humidity"></div>
+                <div class="pressure"></div>
+                <div class="wind-speed"></div>
+
             </div>
         </div>
     </main>
+
+    <%- include footer -%>
 
 </body>
 

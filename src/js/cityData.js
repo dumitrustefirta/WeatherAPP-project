@@ -3,6 +3,10 @@ export const cities =  {
     url: "https://sx-content-labs.sixt.io/chisinau-city-header.jpg",
     name: "Chisinau"
     },
+    palma: {
+    url: "https://images.unsplash.com/photo-1589982191614-409e2f6f43ab?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80",
+    name: "Palma"
+    },
     london: {
       name: "London",
       url:"https://images.unsplash.com/photo-1505761671935-60b3a7427bad?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80"

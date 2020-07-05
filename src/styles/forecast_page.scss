@@ -1,0 +1,76 @@
+.main-forecast {
+    min-height: 100vh;
+    width: 100%;
+    background-color: #85a5ad;
+    background-size: auto;
+    text-align: center;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+
+    .city-name {
+        position: absolute;
+        top: 2em;
+        font-size: 2em;
+        font-weight: bold;
+    }
+}
+
+.forecast-box{
+    width: 90%;
+    height: auto;
+    margin: 0 auto;
+    opacity: .7;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+
+    &__daily {
+        display: flex;
+        flex-flow: column wrap;
+        width: 20%;
+        height: auto;
+        padding: .5em 1em;
+        border: 1px solid grey;
+        text-align: center;
+
+        #date, #temp{
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+
+        #date {
+            margin-bottom: 10px;
+        }
+
+        img {
+            max-width: 80px;
+            height: auto;
+        }
+
+        &:nth-child(odd) {
+            background-color: #b1bec0;
+        }
+    }
+}
+
+@media (max-width: 1024px) {
+    .forecast-box {
+        position: absolute;
+        top: 120px;
+    }
+    .forecast-box__daily {
+        width: 30%;
+        margin-bottom: 1em;
+    }
+}
+
+@media (max-width: 768px) {
+    .forecast-box__daily {
+        width: 100%;
+        margin-bottom: 1em;
+    }
+}

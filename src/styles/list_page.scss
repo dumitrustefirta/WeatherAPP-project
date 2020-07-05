@@ -1,5 +1,8 @@
 .main__list {
-    background-color: #ACBBBE;
+    background-image: url('../images/icons/soft-cloudy.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
     height: auto;
     width: 100%; 
     display: flex;
@@ -11,15 +14,17 @@
         height: auto;
         font-size: 22px;
         font-weight: bold;
+        margin-bottom: 2em;
 
         &__info {
             width: 100%;
             height: auto;
             padding: 0 0.5em;
             margin: 1em 0;
-            border: 1px solid #36464C;
-            display: flex;
-            justify-content: space-between;
+            border: 1px solid #657c81;
+            border-radius: 5px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
             align-items: center;
 
             img {

@@ -6,6 +6,9 @@ const weatherContainer = document.querySelector(".container");
 const iconElement = document.querySelector(".weather-icon");
 const tempElement = document.querySelector(".temperature-value p");
 const descElement = document.querySelector(".temperature-description p");
+const humidityElement = document.querySelector(".humidity");
+const pressureElement = document.querySelector(".pressure");
+const windElement = document.querySelector(".wind-speed");
 const locationElement = document.querySelector(".location p");
 
 const weather = {};
@@ -22,7 +25,7 @@ const today = new Date();
 
 dateElement.innerHTML = today.toLocaleDateString("en-US", optionsDate);
 
-/////********* localStorage ******////////
+/////********* rendering api data ******////////
 
 function renderSelectedCity(citiesKeys) {
     let cityImage = cities[citiesKeys].url;
@@ -64,9 +67,7 @@ function selectCity(cities) {
        
     selectBox.addEventListener('change', (event) => {
         let citiesKeys = event.target.value;
-        if(citiesKeys === undefined) {
-            console.log('dream work');
-        }
+        
         renderSelectedCity(citiesKeys);
         localStorage.setItem('selectedCity', citiesKeys);       
     })
@@ -79,6 +80,9 @@ function renderWeather(data) {
     weather.temperature.value = Math.floor(data.main.temp);
     weather.description = data.weather[0].description;
     weather.iconId = data.weather[0].icon;
+    weather.humidity = data.main.humidity;
+    weather.pressure = data.main.pressure;
+    weather.wind = data.wind.speed;
     weather.city = data.name;
     weather.country = data.sys.country;
 }
@@ -86,16 +90,19 @@ function renderWeather(data) {
 ////******* displaying data weather *********///////
 
 function displayWeather(){
-    weatherContainer.style.display = 'block';
+    //weatherContainer.style.display = 'block';
     iconElement.innerHTML = `<img src="images/${weather.iconId}.png" alt="icon"/>`;
     tempElement.innerHTML = `${weather.temperature.value}°C`;
     descElement.innerHTML = weather.description;
+    humidityElement.innerHTML = `Humidity: ${weather.humidity}%`;
+    pressureElement.innerHTML = `Pressure: ${weather.pressure}mb`;
+    windElement.innerHTML = `Wind speed: ${weather.wind}km/h`;
     locationElement.innerHTML = `${weather.city}, ${weather.country}`;
 }
     
 /////********* localStorage ******////////
 
-export const selectedCity = localStorage.getItem('selectedCity');
+const selectedCity = localStorage.getItem('selectedCity');
 
 if(selectedCity) {
     let selectedCityElement = document.getElementById(selectedCity)
@@ -106,3 +113,4 @@ if(selectedCity) {
 } else {
     console.log('...simple flow');
 }
+

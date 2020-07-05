@@ -4,6 +4,6 @@ export function getByCity(city) {
     return fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=metric`).then(rsp => rsp.json())
 }
 
-export function forecastCity(city) {
+export function getforecastCity(city) {
     return fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${API_KEY}&units=metric`).then(rsp => rsp.json())
 }
