@@ -4,7 +4,7 @@ export const cities =  {
     name: "Chisinau"
     },
     palma: {
-    url: "https://images.unsplash.com/photo-1589982191614-409e2f6f43ab?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80",
+    url: "https://images.unsplash.com/photo-1573407018071-ce0fb323206a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1329&q=80",
     name: "Palma"
     },
     london: {
