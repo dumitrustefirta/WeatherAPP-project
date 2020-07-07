@@ -1,42 +1,13 @@
 import {cities} from './cityData.js';
 import { getforecastCity } from './api.js';
 
-// function selectDropDownCity(cities) {
-//     const container = document.querySelector('.main-forecast');
-//     const selectDrop = document.createElement('select');
-//     selectDrop.setAttribute('id', 'select__forecast');
-    
-//     let emptyoption = document.createElement('option');
-//     emptyoption.setAttribute('value', 'none');
-//     emptyoption.innerText = 'select city';
-
-//     selectDrop.append(emptyoption);
-
-//     for(const city in cities) {
-//         let option = document.createElement('option');
-//         option.setAttribute('value', city);
-//         option.setAttribute('id', city);
-//         option.innerText = cities[city].name;
-
-//         selectDrop.append(option);
-//     }
-
-//     selectDrop.addEventListener('change', (event) => {
-//         let citiesKey = event.target.value;
-        
-//         renderForecast(citiesKey);
-//         localStorage.setItem('selectedForecast', citiesKey);
-//     })
-//     container.append(selectDrop);
-// }
-
-// selectDropDownCity(cities);
-
 const selectedCity = localStorage.getItem('selectedCity');
 
 if(selectedCity) {
     renderForecast(selectedCity);
-}
+} else {
+    alert('Please, select a city from the main page!');
+} 
 
 function renderForecast(citiesKey) {
     getforecastCity(cities[citiesKey].name).then(data => {
@@ -61,11 +32,11 @@ function displayForecastWeather(data) {
     data.map(item => {
         const fixedTime = new Date(item.dt_txt).getHours();
         if(fixedTime === 12) {
-            //let mainPage = document.querySelector('.main-forecast');
             let getCityName = document.querySelector('.city-name')
             let forecastContainer = document.querySelector('.forecast-box');
             let dailyForecastContainer = document.createElement('div');
             let getDay = document.createElement('span');
+            let getMonth = document.createElement('span');
             let getIcon = document.createElement('div');
             let getTemp = document.createElement('span');
             let infoDescription = document.createElement('span');
@@ -74,20 +45,19 @@ function displayForecastWeather(data) {
             
             dailyForecastContainer.setAttribute('class', 'forecast-box__daily');
             getDay.setAttribute('id', 'date');
+            getMonth.setAttribute('id', 'month');
             getIcon.setAttribute('id', 'icon-forecast');
             getTemp.setAttribute('id', 'temp');
 
             ///***  formating the date  ****/    
 
-            let day = new Date(item.dt_txt).getDate();
-            //let month = day.toLocaleString('default', { month: 'short' });
-            let month = new Date(item.dt_txt).getMonth()+1;
-            let year = new Date(item.dt_txt).getFullYear();
-            let mm = month < 10 ? '0' + month : month;
-            let dd = day < 10 ? '0' + day : day;
-
+            let day = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'][new Date(item.dt_txt).getDay()]
+            let dayNumber = new Date(item.dt_txt).getDate();
+            let month = ["Jan.", "Feb.", "Mar.", "Apr.", "May", "Jun.", "Jul.", "Aug.", "Sept.", "Oct.", "Nov.", "Dec."][new Date(item.dt_txt).getMonth()];
+            
+            getDay.innerText = day; 
+            getMonth.innerText = dayNumber + ' ' + month;
             getCityName.innerText = cities[selectedCity].name;
-            getDay.innerText = dd + '.' + mm + '.' + year;
             getIcon.innerHTML = `<img src="images/${item.weather[0].icon}.png" alt="icon"/>`;
             getTemp.innerHTML = `${Math.floor(item.main.temp)}°C`;
             infoDescription.innerText = item.weather[0].description;
@@ -95,29 +65,13 @@ function displayForecastWeather(data) {
             getPressure.innerText = `Pressure: ${item.main.pressure}mb`;
             
             dailyForecastContainer.append(getDay);
+            dailyForecastContainer.append(getMonth);
             dailyForecastContainer.append(getIcon);
             dailyForecastContainer.append(getTemp);
             dailyForecastContainer.append(infoDescription);
             dailyForecastContainer.append(getHumidity);
             dailyForecastContainer.append(getPressure);
             forecastContainer.append(dailyForecastContainer);
-            
-            //mainPage.append(getCityName);
-
         }
     });
 }
-
-///////********  localStorage *******////////////
-
-// const selectedForecast = localStorage.getItem('selectedForecast');
-
-// if(selectedForecast) {
-//     let selectedForecastElement = document.getElementById(selectedForecast)
-//     if(selectedForecastElement){
-//         selectedForecastElement.selected = true
-//         renderForecast(selectedForecast);
-//     } 
-// } else {
-//     console.log('...simple flow');
-// }

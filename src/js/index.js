@@ -2,7 +2,7 @@ import '../styles/styles.scss';
 import {cities} from './cityData.js';
 import { getByCity } from './api.js';
 
-const weatherContainer = document.querySelector(".container");
+//const weatherContainer = document.querySelector(".container");
 const iconElement = document.querySelector(".weather-icon");
 const tempElement = document.querySelector(".temperature-value p");
 const descElement = document.querySelector(".temperature-description p");
@@ -40,8 +40,6 @@ function renderSelectedCity(citiesKeys) {
         .catch(error => console.log(error));
 }
 
-//weatherContainer.style.display = 'none';
-
 /////////******* selecting city and fetch data weather ****/////
 
 function selectCity(cities) {
@@ -67,7 +65,7 @@ function selectCity(cities) {
        
     selectBox.addEventListener('change', (event) => {
         let citiesKeys = event.target.value;
-        
+
         renderSelectedCity(citiesKeys);
         localStorage.setItem('selectedCity', citiesKeys);       
     })
@@ -90,7 +88,6 @@ function renderWeather(data) {
 ////******* displaying data weather *********///////
 
 function displayWeather(){
-    //weatherContainer.style.display = 'block';
     iconElement.innerHTML = `<img src="images/${weather.iconId}.png" alt="icon"/>`;
     tempElement.innerHTML = `${weather.temperature.value}°C`;
     descElement.innerHTML = weather.description;
@@ -113,4 +110,3 @@ if(selectedCity) {
 } else {
     console.log('...simple flow');
 }
-
